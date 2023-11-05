@@ -11,6 +11,7 @@
 </head>
 <body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+<script src="../js/api.js"/>
 <div class="container my-3 card">
 
     <div class="card-body">
@@ -25,38 +26,11 @@
             </tr>
             </thead>
             <tbody>
-            <!-- Os dados da tabela serão inseridos aqui -->
+            <script> getAllAvaliacoes(); </script>
             </tbody>
         </table>
     </div>
 </div>
-<script>
-    const tableBody = document.querySelector('tbody');
-    $.ajax({
-        url: 'http://localhost:9092/movie',
-        method: 'GET',
-        success: function (response) {
-            response.forEach(avaliacao => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                        <td>${avaliacao.id}</td>
-                        <td>${avaliacao.title}</td>
-                        <td>${avaliacao.genre.charAt(0).toUpperCase() + avaliacao.genre.slice(1)}</td>
-                        <td>${avaliacao.year}</td>
-                        <td>${avaliacao.rating}</td>
-                      `;
-                tableBody.appendChild(row);
-            });
-            // Manipule a resposta do backend aqui
-            console.log(response);
-        },
-        error: function (error) {
-            // Trate erros, se houver algum
-            console.error(error);
-        }
-    });
-</script>
-
 
 </body>
 </html>

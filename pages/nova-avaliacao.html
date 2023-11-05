@@ -67,14 +67,14 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Erro de Validação</h4>
+                <h4 class="modal-title" id="tituloModal"></h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <div id="mensagemErro"></div> <!-- Elemento vazio para a mensagem de erro -->
+                <div id="mensagemModal"></div> <!-- Elemento vazio para a mensagem de erro -->
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnModal">Fechar</button>
             </div>
         </div>
     </div>
@@ -96,43 +96,9 @@
         }, false)
     })
 
-    $(document).ready(function () {
-        $('#formAvaliacao').submit(function (event) {
-            // Impedir o envio automático do formulário
-            event.preventDefault();
-
-            // Realizar a validação do formulário usando o Bootstrap
-            if (this.checkValidity() === false) {
-                return;
-            }
-            if (!validarCampos()) {
-                return;
-            }
-            let json = {
-                title: document.getElementById("nome").value,
-                year: parseInt(document.getElementById("ano").value),
-                genre: document.getElementById("genero").value,
-                rating: parseInt(document.getElementById("nota").value)
-            };
-
-            $.ajax({
-                url: 'http://localhost:9092/movie',
-                method: 'POST',
-                data: JSON.stringify(json),
-                contentType: 'application/json',
-                success: function (response) {
-                    // Manipule a resposta do backend aqui
-                    console.log(response);
-                },
-                error: function (error) {
-                    // Trate erros, se houver algum
-                    console.error(error);
-                }
-            });
-        });
-    });
-
 })()</script>
-<script src="../js/validacoes.js"></script>
+<script src="../js/api.js"></script>
+<script src="../js/scripts.js"></script>
+<script src="../js/eventos.js"></script>
 </body>
 </html>

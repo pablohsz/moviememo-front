@@ -9,7 +9,7 @@ function validarCampos() {
     if (!nome.match(/\w{3,}/)) {
         message += "O nome do filme deve conter no mínimo três caracteres.";
         document.getElementById("nome").focus();
-    } else if (ano <= 1888 || ano >= 2024 || (!ano.match(/\w{4}/)) || ano == 'NaN') {
+    } else if (ano <= 1888 || ano >= 2024 || ano == 'NaN') {
         message += "O ano deve ser um número entre 1888 e 2023.";
         document.getElementById("ano").focus();
     } else if (nota < 0 || nota > 5 || nota == 'NaN') {
@@ -18,7 +18,12 @@ function validarCampos() {
     } else {
         return true
     }
-    document.getElementById("mensagemErro").innerHTML = message;
-    $("#myModal").modal();
+    mostrarModal('Erro de validação', message);
     return false; // Permite o envio do formulário se os campos estiverem corretos
+}
+
+function mostrarModal(titulo, mensagem){
+    document.getElementById("tituloModal").innerHTML = titulo;
+    document.getElementById("mensagemModal").innerHTML = mensagem;
+    $("#myModal").modal();
 }
