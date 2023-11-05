@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieMemo</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="../js/api.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+<div class="container my-3 card">
+
+    <div class="card-body">
+        <h5 class="card-title text-center">Nova avaliação</h5>
+        <form class="p-3 needs-validation" method="post" novalidate id="formAvaliacao">
+            <div class="my-3">
+                <div class="form-floating mb-3 mt-3">
+                    <input class="form-control" type="text" name="nome-filme" id="nome" required/>
+                    <label class="form-label">Filme</label>
+                </div>
+            </div>
+
+            <div class="my-3">
+                <div class="form-floating mb-3 mt-3">
+                    <select class="form-select" name="genero-filme" id="genero" required>
+                        <option selected disabled></option>
+                        <option value="action">Action</option>
+                        <option value="comedy">Comedy</option>
+                        <option value="drama">Drama</option>
+                        <option value="scifi">Scifi</option>
+                        <option value="horror">Horror</option>
+                        <option value="romance">Romance</option>
+                        <option value="adventure">Adventure</option>
+                        <option value="documentary">Documentary</option>
+                    </select>
+
+                    <label for="genero">Gênero</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="my-3 col">
+                    <div class="form-floating mb-3 mt-3">
+                        <input class="form-control" type="number" name="ano-filme" id="ano" required/>
+                        <label class="form-label">Ano:</label>
+                    </div>
+                </div>
+                <div class="my-3 col">
+                    <div class="form-floating mb-3 mt-3">
+                        <input class="form-control" type="number" name="nota-filme" id="nota" required/>
+                        <label class="form-label">Nota</label>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary btn-danger">Enviar</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Erro de Validação</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="mensagemErro"></div> <!-- Elemento vazio para a mensagem de erro -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>(() => {
+    'use strict'
+    const forms = document.querySelectorAll('.needs-validation')
+
+    Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+            if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+            }
+
+            form.classList.add('was-validated')
+        }, false)
+    })
+
+    $(document).ready(function () {
+        $('#formAvaliacao').submit(function (event) {
+            // Impedir o envio automático do formulário
+            event.preventDefault();
+
+            // Realizar a validação do formulário usando o Bootstrap
+            if (this.checkValidity() === false) {
+                return;
+            }
+            if (!validarCampos()) {
+                return;
+            }
+            let json = {
+                title: document.getElementById("nome").value,
+                year: parseInt(document.getElementById("ano").value),
+                genre: document.getElementById("genero").value,
+                rating: parseInt(document.getElementById("nota").value)
+            };
+
+            $.ajax({
+                url: 'http://localhost:9092/movie',
+                method: 'POST',
+                data: JSON.stringify(json),
+                contentType: 'application/json',
+                success: function (response) {
+                    // Manipule a resposta do backend aqui
+                    console.log(response);
+                },
+                error: function (error) {
+                    // Trate erros, se houver algum
+                    console.error(error);
+                }
+            });
+        });
+    });
+
+})()</script>
+<script src="../js/validacoes.js"></script>
+</body>
+</html>

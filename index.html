@@ -6,23 +6,28 @@
     <title>MovieMemo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
 </head>
 <body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
 
+
 <div class="px-4 py-5 my-5 text-center">
-    <img class="d-block mx-auto mb-4" src="images/moviememo-icon.svg" alt="logotipo da aplicação moviememo" width="72">
+    <img class="d-block mx-auto mb-4" src="img/moviememo-icon.svg" alt="logotipo da aplicação moviememo" width="72">
     <h1 class="display-5 fw-bold text-body-emphasis">Movie Memo</h1>
     <div class="col-lg-6 mx-auto">
         <p class="lead mb-4">Aplicação Web de avaliação de filmes pessoal, onde você pode adicionar filmes e atribuir
             notas a eles para seu próprio registro. Organize suas opiniões sobre os filmes que assistiu de forma
             conveniente. </p>
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <button id="btn-nova-avaliacao" type="button" class="btn btn-primary btn-sm px-4 gap-3 btn-danger" >Nova avaliação</button>
-            <button id="btn-consultar" type="button" class="btn btn-primary btn-sm px-4 gap-3 btn-danger">Consultar avaliações</button>
-            <button id="btn-relatorio" type="button" class="btn btn-primary btn-sm px-4 gap-3 btn-danger">Relatório de avaliações</button>
+            <a href="pages/nova-avaliacao.html" class="btn btn-primary btn-sm px-4 gap-3 btn-danger">Nova avaliação</a>
+            <a href="" class="btn btn-primary btn-sm px-4 gap-3 btn-danger">Consultar
+                avaliações</a>
+            <a href="http://localhost:9092/relatorio/pdf" class="btn btn-primary btn-sm px-4 gap-3 btn-danger">Relatório
+                de avaliações</a>
+
         </div>
     </div>
 </div>
